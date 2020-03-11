@@ -1,3 +1,5 @@
+import 'dart:convert' show jsonDecode;
+
 class City {
   final String city_name;
   final String city_code;
@@ -19,9 +21,9 @@ class Calculate {
 
   Calculate({this.estimate, this.details, this.day, this.cityphoto});
 
-  factory Calculate.fromJson(Map<List, dynamic> json) {
+  factory Calculate.fromJson(Map<String, dynamic> json) {
     return Calculate(
-      estimate: json['estimate'],
+      estimate: jsonDecode(json)['estimate'],
       details: json['details'] as String,
       day: json['day'] as String,
       cityphoto: json['cityphoto'] as String,
