@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:travel_calculator_flutter_client/utills/api.dart';
+import 'package:travel_calculator_flutter_client/utills/helper.dart';
+import 'package:travel_calculator_flutter_client/loading.dart';
+import 'package:travel_calculator_flutter_client/models/models.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,6 +17,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Landing(),
+      onGenerateRoute: (RouteSettings settings) {
+        print('build route for ${settings.name}');
+        var routes = <String, WidgetBuilder>{
+          "loading": (ctx) => Loading(),
+        };
+        WidgetBuilder builder = routes[settings.name];
+        return MaterialPageRoute(builder: (ctx) => builder(ctx));
+      },
     );
   }
 }
@@ -24,37 +35,37 @@ class Landing extends StatefulWidget {
 }
 
 class _LandingState extends State<Landing> {
-  List<String> _cities = [
-    '런던',
-    '로마',
-    '밀라노',
-    '더블린',
-    '브라티슬라바',
-    '포르토',
-    '바르샤바',
-    '앙카라',
-    '싱가포르',
-    '두바이',
-    '쿠알라룸푸르',
-    '워싱톤',
-    '마이애미',
-    '시카고',
-    '시드니',
+  List<City> _cities = [
+    City('London', 'LHR'),
+    City('Rome', 'FCO'),
+    City('Dublin', 'DUB'),
+    City('Manchester', 'MAN'),
+    City('Porto', 'OPO'),
+    City('Warsaw', 'WAW'),
+    City('Milan', 'MXP'),
+    City('Ankara', 'ESB'),
+    City('Singapore', 'SIN'),
+    City('Dubai', 'DXB'),
+    City('Kuala Lumpur', 'KUL'),
+    City('Washington', 'IAD'),
+    City('Miami', 'MIA'),
+    City('Chicago', 'ORD'),
+    City('Sydney', 'SYD'),
   ];
-  List<String> _interest = [
-    '오로라',
-    '유적',
-    '맛집',
-    '미술관',
-    '마사지',
-    '비치',
-    '산림욕',
-    '플리마켓',
-    '아울렛',
-    '쇼핑',
-    '서핑',
-    '캠핑',
-    '호캉스',
+  List<Interest> _interest = [
+    Interest('오로라', 100),
+    Interest('유적', 200),
+    Interest('맛집', 300),
+    Interest('미술관', 400),
+    Interest('마사지', 500),
+    Interest('비치', 600),
+    Interest('산림욕', 700),
+    Interest('플리마켓', 800),
+    Interest('아울렛', 900),
+    Interest('쇼핑', 1000),
+    Interest('서핑', 1100),
+    Interest('캠핑', 1200),
+    Interest('호캉스', 1300),
   ];
   List<String> _gender = ['male', 'female'];
   List<String> _age = ['10대', '20대', '30대', '40대', '50대'];
@@ -94,10 +105,10 @@ class _LandingState extends State<Landing> {
           DropdownButtonFormField<String>(
             value: _city_selected,
             decoration: InputDecoration(labelText: 'Please select a city'),
-            items: _cities.map((String value) {
+            items: _cities.map((City value) {
               return new DropdownMenuItem<String>(
-                value: value,
-                child: new Text(value),
+                value: value.city_name,
+                child: new Text(value.city_name),
               );
             }).toList(),
             onChanged: (value) {
@@ -200,10 +211,10 @@ class _LandingState extends State<Landing> {
           ),
           DropdownButtonFormField<String>(
             decoration: InputDecoration(labelText: 'select interest'),
-            items: _interest.map((String value) {
+            items: _interest.map((Interest value) {
               return new DropdownMenuItem<String>(
-                value: value,
-                child: new Text(value),
+                value: value.interest_name,
+                child: new Text(value.interest_name),
               );
             }).toList(),
             onChanged: (value) {
@@ -213,8 +224,40 @@ class _LandingState extends State<Landing> {
             },
           ),
           RaisedButton(
-            onPressed: () {
-              fetchCalculate();
+            onPressed: () async {
+              var cityName = _city_selected;
+              var cityCode = _cities
+                  .where((city) => city.city_name == _city_selected)
+                  .toList()[0]
+                  .city_code
+                  .toString();
+
+              var interestCode = _interest
+                  .where((interest) =>
+                      interest.interest_name == _interest_selected)
+                  .toList()[0]
+                  .interest_code;
+
+              var genderCode = _gender_selected == 'female' ? 1 : 2;
+
+              var ageCode = _age_selected != null
+                  ? int.parse(_age_selected.substring(1, 2))
+                  : '';
+
+              var departureDate =
+                  _departureDate_selected.toString().substring(0, 10);
+              var arrivalDate =
+                  _arrivalDate_selected.toString().substring(0, 10);
+
+              var userCode = interestCode + genderCode + ageCode;
+              var result = await fetchCalculate(
+                  cityName, cityCode, departureDate, arrivalDate, userCode);
+              print(result);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          Loading(data: result, city: cityName)));
             },
             child: const Text('calculate', style: TextStyle(fontSize: 20)),
           ),
