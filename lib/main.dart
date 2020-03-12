@@ -252,7 +252,7 @@ class _LandingState extends State<Landing> {
               var userCode = interestCode + genderCode + ageCode;
               var result = await fetchCalculate(
                   cityName, cityCode, departureDate, arrivalDate, userCode);
-              print(result);
+
               Navigator.push(
                   context,
                   MaterialPageRoute(

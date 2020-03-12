@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:travel_calculator_flutter_client/models/models.dart';
@@ -9,7 +11,8 @@ class Loading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(data.details);
+    // Estimate parsedEstimate = Estimate.fromJson(data.estimate);
+    // print(parsedEstimate);
     if (data == null) {
       return new Scaffold(
         backgroundColor: Colors.blue,
@@ -33,12 +36,7 @@ class Loading extends StatelessWidget {
         body: Column(
           children: <Widget>[
             Image.network(data.cityphoto),
-            Text(data.day.toString() +
-                '일 ' +
-                city +
-                ' 여행 경비로는 ' +
-                data.estimate.total.toString() +
-                '만원이 예상됩니다.')
+            Text(data.day.toString() + '일 ' + city + ' 여행 경비로는 예상됩니다.')
           ],
         ));
   }

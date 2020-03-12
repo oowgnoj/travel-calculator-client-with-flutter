@@ -14,31 +14,39 @@ class Interest {
 }
 
 class Calculate {
-  final Estimate estimate;
-  final Object details;
-  final String day;
-  final String cityphoto;
+  Estimate estimate;
+  Object details;
+  int day;
+  String cityphoto;
 
   Calculate({this.estimate, this.details, this.day, this.cityphoto});
 
   factory Calculate.fromJson(Map<String, dynamic> json) {
     return Calculate(
-      estimate: jsonDecode(json)['estimate'],
-      details: json['details'] as String,
-      day: json['day'] as String,
-      cityphoto: json['cityphoto'] as String,
+      estimate: Estimate.fromJson(json['estimate']),
+      details: json['details'],
+      day: json['day'],
+      cityphoto: json['cityphoto'],
     );
   }
 }
 
 class Estimate {
-  final int restaurant;
-  final int flight;
-  final int nonstopflight;
-  final int hotel;
-  final int hotelratings;
-  final int total;
+  String restaurant;
+  String flight;
+  String nonstopflight;
+  String hotel;
+  String hotelratings;
+  String total;
 
+  // Estimate(Map<String, dynamic> data) {
+  //   restaurant = data['restaurant'];
+  //   flight = data['flight'];
+  //   nonstopflight = data['nonstopflight'];
+  //   hotel = data['hotel'];
+  //   hotelratings = data['hotelratings'];
+  //   total = data['total'];
+  // }
   Estimate(
       {this.restaurant,
       this.flight,
@@ -47,13 +55,33 @@ class Estimate {
       this.hotelratings,
       this.total});
 
-  factory Estimate.fromJson(Map<String, dynamic> json) {
+  factory Estimate.fromJson(Map<String, dynamic> data) {
     return Estimate(
-        restaurant: json['estimate'],
-        flight: json['flight'],
-        nonstopflight: json['nonstopflight'],
-        hotel: json['hotel'],
-        hotelratings: json['hotelratings'],
-        total: json['total']);
+      total: data['total'] as String,
+      restaurant: data['restaurant'] as String,
+      nonstopflight: data['nonstopflight'] as String,
+      hotel: data['hotel'] as String,
+      hotelratings: data['hotelratings'] as String,
+    );
+  }
+}
+
+class Restaurant {
+  String name;
+  String photo;
+  String cuisines;
+  String price;
+  String rating;
+
+  Restaurant({this.name, this.photo, this.cuisines, this.price, this.rating});
+
+  factory Restaurant.fromJson(Map<String, dynamic> json) {
+    return Restaurant(
+      name: json['name'],
+      photo: json['photo'],
+      cuisines: json['cuisines'],
+      rating: json['rating'],
+      price: json['price'],
+    );
   }
 }
