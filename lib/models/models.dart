@@ -61,7 +61,7 @@ class Estimate {
 // details : {<Map>flight, <Map>hotel, <Map> Restaurant}
 class Details {
   List<Flight> flight;
-  List hotel;
+  List<Hotel> hotel;
   List<Restaurant> restaurant;
   Details({this.hotel, this.flight, this.restaurant});
 
@@ -73,8 +73,11 @@ class Details {
     List<Restaurant> restaurantList =
         list.map((i) => Restaurant.fromJson(i)).toList();
 
+    var hList = json['hotel'] as List;
+    List<Hotel> hotelList = hList.map((i) => Hotel.fromJson(i)).toList();
+
     return Details(
-        flight: flightList, hotel: json['hotel'], restaurant: restaurantList);
+        flight: flightList, hotel: hotelList, restaurant: restaurantList);
   }
 }
 
@@ -168,7 +171,7 @@ class Hotel {
         rating: json['rating'],
         name: json['name'],
         photo: json['photo'],
-        price: json['price'],
+        price: json['price'].toInt(),
         room: json['roon']);
   }
 }
