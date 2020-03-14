@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Landing(),
       onGenerateRoute: (RouteSettings settings) {
-        print('build route for ${settings.name}');
+        ('build route for ${settings.name}');
         var routes = <String, WidgetBuilder>{
           "loading": (ctx) => Loading(),
         };
@@ -107,8 +107,8 @@ class _LandingState extends State<Landing> {
             decoration: InputDecoration(labelText: 'Please select a city'),
             items: _cities.map((City value) {
               return new DropdownMenuItem<String>(
-                value: value.city_name,
-                child: new Text(value.city_name),
+                value: value.cityName,
+                child: new Text(value.cityName),
               );
             }).toList(),
             onChanged: (value) {
@@ -176,6 +176,7 @@ class _LandingState extends State<Landing> {
               Container(
                 width: 100,
                 child: DropdownButtonFormField<String>(
+                  value: _gender_selected,
                   decoration: InputDecoration(labelText: 'select gender'),
                   items: _gender.map((String value) {
                     return new DropdownMenuItem<String>(
@@ -193,6 +194,7 @@ class _LandingState extends State<Landing> {
               Container(
                 width: 100,
                 child: DropdownButtonFormField<String>(
+                  value: _age_selected,
                   decoration: InputDecoration(labelText: 'select age'),
                   items: _age.map((String value) {
                     return new DropdownMenuItem<String>(
@@ -210,11 +212,12 @@ class _LandingState extends State<Landing> {
             ],
           ),
           DropdownButtonFormField<String>(
+            value: _interest_selected,
             decoration: InputDecoration(labelText: 'select interest'),
             items: _interest.map((Interest value) {
               return new DropdownMenuItem<String>(
-                value: value.interest_name,
-                child: new Text(value.interest_name),
+                value: value.interestName,
+                child: new Text(value.interestName),
               );
             }).toList(),
             onChanged: (value) {
@@ -227,19 +230,18 @@ class _LandingState extends State<Landing> {
             onPressed: () async {
               var cityName = _city_selected;
               var cityCode = _cities
-                  .where((city) => city.city_name == _city_selected)
+                  .where((city) => city.cityName == _city_selected)
                   .toList()[0]
-                  .city_code
+                  .cityCode
                   .toString();
 
               var interestCode = _interest
-                  .where((interest) =>
-                      interest.interest_name == _interest_selected)
+                  .where(
+                      (interest) => interest.interestName == _interest_selected)
                   .toList()[0]
-                  .interest_code;
+                  .interestCode;
 
               var genderCode = _gender_selected == 'female' ? 1 : 2;
-
               var ageCode = _age_selected != null
                   ? int.parse(_age_selected.substring(1, 2))
                   : '';
@@ -250,8 +252,11 @@ class _LandingState extends State<Landing> {
                   _arrivalDate_selected.toString().substring(0, 10);
 
               var userCode = interestCode + genderCode + ageCode;
+
               var result = await fetchCalculate(
                   cityName, cityCode, departureDate, arrivalDate, userCode);
+
+              // 전부다 helper 에 옮기고, helper 에서 이것저것 import 해오고, 가공해서 return
 
               Navigator.push(
                   context,

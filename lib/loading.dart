@@ -11,8 +11,10 @@ class Loading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Estimate parsedEstimate = Estimate.fromJson(data.estimate);
-    // print(parsedEstimate);
+    print(data.details.restaurant[0].price);
+    print(data.details.flight[0].airline);
+    print(data.details.flight[0].iternity[0].duration);
+    print(data.details.flight[0].iternity[0].segments[0].arrival.city);
     if (data == null) {
       return new Scaffold(
         backgroundColor: Colors.blue,
@@ -36,7 +38,15 @@ class Loading extends StatelessWidget {
         body: Column(
           children: <Widget>[
             Image.network(data.cityphoto),
-            Text(data.day.toString() + '일 ' + city + ' 여행 경비로는 예상됩니다.')
+            Text(
+              data.day.toString() +
+                  '일 ' +
+                  city +
+                  ' 여행 경비로는 ' +
+                  data.estimate.total.toString() +
+                  '원 이 예상됩니다.',
+              style: TextStyle(fontSize: 20),
+            )
           ],
         ));
   }
