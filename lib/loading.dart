@@ -15,6 +15,7 @@ class Loading extends StatelessWidget {
     print(data.details.flight[0].airline);
     print(data.details.flight[0].iternity[0].duration);
     print(data.details.flight[0].iternity[0].segments[0].arrival.city);
+    print(data.details.hotel[0].price);
     if (data == null) {
       return new Scaffold(
         backgroundColor: Colors.blue,

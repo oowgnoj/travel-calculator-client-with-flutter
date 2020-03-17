@@ -3,6 +3,8 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:travel_calculator_flutter_client/utills/api.dart';
 import 'package:travel_calculator_flutter_client/utills/helper.dart';
 import 'package:travel_calculator_flutter_client/loading.dart';
+import 'package:travel_calculator_flutter_client/register.dart';
+import 'package:travel_calculator_flutter_client/login.dart';
 import 'package:travel_calculator_flutter_client/models/models.dart';
 
 void main() => runApp(MyApp());
@@ -33,6 +35,8 @@ class Landing extends StatefulWidget {
   @override
   _LandingState createState() => _LandingState();
 }
+
+final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
 class _LandingState extends State<Landing> {
   List<City> _cities = [
@@ -80,6 +84,7 @@ class _LandingState extends State<Landing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Color(0xFFEEEEEE),
       appBar: AppBar(
         elevation: 0,
@@ -93,11 +98,60 @@ class _LandingState extends State<Landing> {
           ),
         ),
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () => _scaffoldKey.currentState.openDrawer(),
           icon: Icon(
             Feather.menu,
             color: Colors.black,
           ),
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+                decoration: BoxDecoration(),
+                child: Column(
+                  children: <Widget>[
+                    CircleAvatar(
+                        backgroundColor: Colors.brown.shade800,
+                        child: Text(
+                          'AH',
+                          style: TextStyle(color: Colors.white),
+                        )),
+                    Text(
+                      'Drawer Header',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                      ),
+                    ),
+                    Text(
+                      'Drawer Header',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ],
+                )),
+            ListTile(
+              leading: Icon(Icons.message),
+              title: Text('Messages'),
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Login()));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.account_circle),
+              title: Text('Profile'),
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+            ),
+          ],
         ),
       ),
       body: Column(
