@@ -3,6 +3,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:travel_calculator_flutter_client/utills/api.dart';
 import 'package:travel_calculator_flutter_client/utills/data.dart';
 import 'package:travel_calculator_flutter_client/models/models.dart';
+import 'package:travel_calculator_flutter_client/drawer.dart';
 
 class Register extends StatefulWidget {
   const Register({Key key}) : super(key: key);
@@ -44,61 +45,7 @@ class _RegisterState extends State<Register> {
           ),
         ),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-                decoration: BoxDecoration(),
-                child: Column(
-                  children: <Widget>[
-                    CircleAvatar(
-                        backgroundColor: Colors.brown.shade800,
-                        child: Text(
-                          'AH',
-                          style: TextStyle(color: Colors.white),
-                        )),
-                    Text(
-                      'Drawer Header',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                      ),
-                    ),
-                    Text(
-                      'Drawer Header',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                      ),
-                    ),
-                  ],
-                )),
-            ListTile(
-              leading: Icon(Icons.message),
-              title: Text('Messages'),
-              onTap: () {
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => Register()));
-              },
-            ),
-            //  Navigator.push(
-            //       context,
-            //       MaterialPageRoute(
-            //           builder: (context) =>
-            //               Loading(data: result, city: cityName)));
-            // },
-            ListTile(
-              leading: Icon(Icons.account_circle),
-              title: Text('Profile'),
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
-            ),
-          ],
-        ),
-      ),
+      drawer: MyDrawer(),
       body: Form(
         key: _formKey,
         child: Padding(

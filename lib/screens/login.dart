@@ -3,7 +3,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:travel_calculator_flutter_client/utills/api.dart';
 import 'package:travel_calculator_flutter_client/utills/data.dart';
 import 'package:travel_calculator_flutter_client/models/models.dart';
-import 'package:travel_calculator_flutter_client/register.dart';
+import 'package:travel_calculator_flutter_client/screens/register.dart';
 
 class Login extends StatefulWidget {
   const Login({Key key}) : super(key: key);

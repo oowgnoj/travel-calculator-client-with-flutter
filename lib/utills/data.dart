@@ -17,3 +17,21 @@ List<Interest> interestMap = [
 ];
 List<String> genderMap = ['male', 'female'];
 List<String> ageMap = ['10대', '20대', '30대', '40대', '50대'];
+
+List<City> cityMap = [
+  City('London', 'LHR'),
+  City('Rome', 'FCO'),
+  City('Dublin', 'DUB'),
+  City('Manchester', 'MAN'),
+  City('Porto', 'OPO'),
+  City('Warsaw', 'WAW'),
+  City('Milan', 'MXP'),
+  City('Ankara', 'ESB'),
+  City('Singapore', 'SIN'),
+  City('Dubai', 'DXB'),
+  City('Kuala Lumpur', 'KUL'),
+  City('Washington', 'IAD'),
+  City('Miami', 'MIA'),
+  City('Chicago', 'ORD'),
+  City('Sydney', 'SYD'),
+];

@@ -1,8 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:travel_calculator_flutter_client/models/models.dart';
+import 'package:travel_calculator_flutter_client/components/drawer.dart';
+import 'dart:convert';
 
 class Loading extends StatelessWidget {
   final Calculate data;
@@ -11,11 +11,6 @@ class Loading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(data.details.restaurant[0].price);
-    print(data.details.flight[0].airline);
-    print(data.details.flight[0].iternity[0].duration);
-    print(data.details.flight[0].iternity[0].segments[0].arrival.city);
-    print(data.details.hotel[0].price);
     if (data == null) {
       return new Scaffold(
         backgroundColor: Colors.blue,
@@ -36,6 +31,7 @@ class Loading extends StatelessWidget {
             ),
           ),
         ),
+        drawer: MyDrawer(),
         body: Column(
           children: <Widget>[
             Image.network(data.cityphoto),
