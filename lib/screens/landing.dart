@@ -14,8 +14,6 @@ class Landing extends StatefulWidget {
   _LandingState createState() => _LandingState();
 }
 
-final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
 class _LandingState extends State<Landing> {
   String _city_selected;
   String _gender_selected;
@@ -27,7 +25,6 @@ class _LandingState extends State<Landing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       backgroundColor: Color(0xFFEEEEEE),
       appBar: AppBar(
         elevation: 0,
@@ -40,11 +37,11 @@ class _LandingState extends State<Landing> {
             color: Colors.black,
           ),
         ),
-        leading: IconButton(
-          onPressed: () => _scaffoldKey.currentState.openDrawer(),
-          icon: Icon(
-            Feather.menu,
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: new Icon(Feather.menu),
             color: Colors.black,
+            onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
       ),

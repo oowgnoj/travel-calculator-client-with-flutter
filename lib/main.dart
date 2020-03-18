@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
         ('build route for ${settings.name}');
         var routes = <String, WidgetBuilder>{
           "loading": (ctx) => Loading(),
+          "/": (ctx) => Landing(),
         };
         WidgetBuilder builder = routes[settings.name];
         return MaterialPageRoute(builder: (ctx) => builder(ctx));

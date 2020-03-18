@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:travel_calculator_flutter_client/components/drawer.dart';
 import 'package:travel_calculator_flutter_client/utills/api.dart';
 import 'package:travel_calculator_flutter_client/utills/data.dart';
 import 'package:travel_calculator_flutter_client/models/models.dart';
 import 'package:travel_calculator_flutter_client/screens/register.dart';
+import 'package:travel_calculator_flutter_client/screens/login.dart';
 
 class Login extends StatefulWidget {
   const Login({Key key}) : super(key: key);
@@ -13,7 +15,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
   final _idController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -24,7 +25,6 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       backgroundColor: Color(0xFFEEEEEE),
       appBar: AppBar(
         elevation: 0,
@@ -37,11 +37,11 @@ class _LoginState extends State<Login> {
             color: Colors.black,
           ),
         ),
-        leading: IconButton(
-          onPressed: () => _scaffoldKey.currentState.openDrawer(),
-          icon: Icon(
-            Feather.menu,
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: new Icon(Feather.menu),
             color: Colors.black,
+            onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
       ),
@@ -76,26 +76,19 @@ class _LoginState extends State<Login> {
                   ],
                 )),
             ListTile(
-              leading: Icon(Icons.message),
-              title: Text('Messages'),
+              leading: Icon(Icons.home),
+              title: Text('home'),
               onTap: () {
-                // Navigator.push(context,
-                // MaterialPageRoute(builder: (context) => Register()));
+                Navigator.pushNamed(context, '/');
               },
             ),
-            //  Navigator.push(
-            //       context,
-            //       MaterialPageRoute(
-            //           builder: (context) =>
-            //               Loading(data: result, city: cityName)));
-            // },
             ListTile(
-              leading: Icon(Icons.account_circle),
+              leading: Icon(Icons.face),
               title: Text('Profile'),
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Login()));
+              },
             ),
           ],
         ),
@@ -143,8 +136,7 @@ class _LoginState extends State<Login> {
                     if (_formKey.currentState.validate()) {
                       String id = _idController.text;
                       String password = _passwordController.text;
-                      postSignin(id, password, _genderSelected, _ageSelected,
-                          _interestSelected);
+                      postLogin(id, password);
                     }
                   },
                   child: Text('Submit'),

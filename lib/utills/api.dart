@@ -4,6 +4,22 @@ import 'package:http/http.dart' as http;
 
 // generate body
 
+Future<Object> postLogin(id, password) async {
+  Map<String, String> json = {
+    'id': id,
+    'password': password,
+  };
+  var uri = Uri.http('3.15.20.155:5000', '/signin');
+  final response = await http.post(uri, body: json);
+  if (response.statusCode == 200) {
+    print(response);
+  } else {
+    // If the server did not return a 200 OK response, then throw an exception.
+    print(response);
+    // throw Exception(response.error);
+  }
+}
+
 Future<Object> postSignin(id, password, gender, age, interest) async {
   Map<String, String> json = {
     'id': id,

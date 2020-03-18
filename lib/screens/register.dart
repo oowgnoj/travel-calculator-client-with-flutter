@@ -3,7 +3,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:travel_calculator_flutter_client/utills/api.dart';
 import 'package:travel_calculator_flutter_client/utills/data.dart';
 import 'package:travel_calculator_flutter_client/models/models.dart';
-import 'package:travel_calculator_flutter_client/drawer.dart';
+import 'package:travel_calculator_flutter_client/components/drawer.dart';
 
 class Register extends StatefulWidget {
   const Register({Key key}) : super(key: key);
@@ -13,7 +13,6 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
   final _idController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -24,7 +23,6 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       backgroundColor: Color(0xFFEEEEEE),
       appBar: AppBar(
         elevation: 0,
@@ -37,15 +35,15 @@ class _RegisterState extends State<Register> {
             color: Colors.black,
           ),
         ),
-        leading: IconButton(
-          onPressed: () => _scaffoldKey.currentState.openDrawer(),
-          icon: Icon(
-            Feather.menu,
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: new Icon(Feather.menu),
             color: Colors.black,
+            onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
       ),
-      drawer: MyDrawer(),
+      drawer: new MyDrawer(),
       body: Form(
         key: _formKey,
         child: Padding(

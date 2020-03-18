@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:travel_calculator_flutter_client/Main.dart';
 import 'package:travel_calculator_flutter_client/screens/login.dart';
+import 'package:travel_calculator_flutter_client/screens/landing.dart';
 
 class MyDrawer extends StatelessWidget {
   @override
@@ -35,20 +37,19 @@ class MyDrawer extends StatelessWidget {
                 ],
               )),
           ListTile(
-            leading: Icon(Icons.message),
-            title: Text('Messages'),
+            leading: Icon(Icons.home),
+            title: Text('home'),
+            onTap: () {
+              Navigator.pushNamed(context, '/');
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.face),
+            title: Text('Profile'),
             onTap: () {
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Login()));
             },
-          ),
-          ListTile(
-            leading: Icon(Icons.account_circle),
-            title: Text('Profile'),
-          ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
           ),
         ],
       ),
