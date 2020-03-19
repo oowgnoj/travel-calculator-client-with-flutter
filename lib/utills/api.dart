@@ -5,18 +5,26 @@ import 'package:http/http.dart' as http;
 // generate body
 
 Future<Object> postLogin(id, password) async {
+  print(id);
+  print(password);
   Map<String, String> json = {
     'id': id,
     'password': password,
   };
   var uri = Uri.http('3.15.20.155:5000', '/signin');
-  final response = await http.post(uri, body: json);
+  const headers = <String, String>{
+    'Content-Type': 'application/json; charset=UTF-8',
+  };
+
+  final response =
+      await http.post(uri, headers: headers, body: jsonEncode(json));
   if (response.statusCode == 200) {
-    print(response);
+    // return LoginRes.fromJson(response.body);
+    print(response.body);
   } else {
     // If the server did not return a 200 OK response, then throw an exception.
-    print(response);
-    // throw Exception(response.error);
+    return response.body;
+    // throw Exception(response);
   }
 }
 
@@ -26,15 +34,20 @@ Future<Object> postSignin(id, password, gender, age, interest) async {
     'password': password,
     'gender': gender,
     'age': age,
-    'interest': interest
+    'keyword': interest
   };
+  const headers = <String, String>{
+    'Content-Type': 'application/json; charset=UTF-8',
+  };
+
   var uri = Uri.http('3.15.20.155:5000', '/signup');
-  final response = await http.post(uri, body: json);
+  final response =
+      await http.post(uri, headers: headers, body: jsonEncode(json));
   if (response.statusCode == 200) {
-    print(response);
+    return response.body;
   } else {
+    print(response.body);
     // If the server did not return a 200 OK response, then throw an exception.
-    print(response);
     // throw Exception(response.error);
   }
 }

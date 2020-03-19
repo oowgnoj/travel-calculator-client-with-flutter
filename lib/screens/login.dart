@@ -130,13 +130,14 @@ class _LoginState extends State<Login> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: RaisedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     // Validate will return true if the form is valid, or false if
                     // the form is invalid.
                     if (_formKey.currentState.validate()) {
                       String id = _idController.text;
                       String password = _passwordController.text;
-                      postLogin(id, password);
+                      LoginRes res = await postLogin(id, password);
+                      print(res.id);
                     }
                   },
                   child: Text('Submit'),

@@ -1,5 +1,19 @@
 import 'dart:convert' show jsonDecode;
 
+class LoginRes {
+  String id;
+  String password;
+
+  LoginRes({this.id, this.password});
+
+  factory LoginRes.fromJson(dynamic json) {
+    return LoginRes(
+      id: json['id'],
+      password: json['password'],
+    );
+  }
+}
+
 class City {
   final String cityName;
   final String cityCode;

@@ -126,14 +126,14 @@ class _RegisterState extends State<Register> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: RaisedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     // Validate will return true if the form is valid, or false if
                     // the form is invalid.
                     if (_formKey.currentState.validate()) {
                       String id = _idController.text;
                       String password = _passwordController.text;
-                      postSignin(id, password, _genderSelected, _ageSelected,
-                          _interestSelected);
+                      await postSignin(id, password, _genderSelected,
+                          _ageSelected, _interestSelected);
                     }
                   },
                   child: Text('Submit'),
