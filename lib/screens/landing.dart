@@ -175,34 +175,16 @@ class _LandingState extends State<Landing> {
           RaisedButton(
             onPressed: () async {
               var cityName = _city_selected;
-              var cityCode = cityMap
-                  .where((city) => city.cityName == _city_selected)
-                  .toList()[0]
-                  .cityCode
-                  .toString();
-
-              var interestCode = interestMap
-                  .where(
-                      (interest) => interest.interestName == _interest_selected)
-                  .toList()[0]
-                  .interestCode;
-
-              var genderCode = _gender_selected == 'female' ? 1 : 2;
-              var ageCode = _age_selected != null
-                  ? int.parse(_age_selected.substring(1, 2))
-                  : '';
-
+              var cityCode = Helper.getCityCode(_city_selected);
+              var interestCode = Helper.getInterestCode(_interest_selected);
+              var genderCode = Helper.getGenderCode(_gender_selected);
+              var ageCode = Helper.getAgeCode(_age_selected);
               var departureDate =
-                  _departureDate_selected.toString().substring(0, 10);
-              var arrivalDate =
-                  _arrivalDate_selected.toString().substring(0, 10);
-
+                  Helper.getFormattedDate(_departureDate_selected);
+              var arrivalDate = Helper.getFormattedDate(_arrivalDate_selected);
               var userCode = interestCode + genderCode + ageCode;
-
               var result = await fetchCalculate(
                   cityName, cityCode, departureDate, arrivalDate, userCode);
-
-              // 전부다 helper 에 옮기고, helper 에서 이것저것 import 해오고, 가공해서 return
 
               Navigator.push(
                   context,
