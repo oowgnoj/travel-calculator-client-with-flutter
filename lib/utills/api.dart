@@ -1,23 +1,46 @@
 import 'dart:convert';
 import 'package:travel_calculator_flutter_client/models/models.dart';
 import 'package:http/http.dart' as http;
+import 'package:requests/requests.dart';
 
 // generate body
 
-Future<Object> postLogin(id, password) async {
-  Map<String, String> json = {
-    'id': id,
-    'password': password,
-  };
-  var uri = Uri.http('192.168.35.248:5000', '/signin');
+Future<Object> getUser() async {
   const headers = <String, String>{
     'Content-Type': 'application/json; charset=UTF-8',
   };
 
-  final response =
-      await http.post(uri, headers: headers, body: jsonEncode(json));
+  final response = await Requests.get('http://192.168.35.248:5000/mypage');
   if (response.statusCode == 200) {
-    return LoginRes.fromJson(response.body);
+    print('res!!!!!');
+    print(response.json());
+    // return LoginRes.fromJson(jsonDecode(response.body));
+  } else {
+    print(response.json());
+    // throw Exception('failed to login');
+    // If the server did not return a 200 OK response, then throw an exception.
+    // return response.body;
+    // throw Exception(response);
+  }
+}
+
+Future<Object> postLogin(id, password) async {
+  Map<String, String> json = {
+    "id": id,
+    "password": password,
+  };
+
+  const headers = <String, String>{
+    'Content-Type': 'application/json; charset=UTF-8',
+  };
+
+  final response = await Requests.post('http://192.168.35.248:5000/signin',
+      headers: headers,
+      body: {"id": id, "password": password},
+      bodyEncoding: RequestBodyEncoding.JSON);
+  if (response.statusCode == 200) {
+    return LoginRes.fromJson(response.json());
+    // return LoginRes.fromJson(jsonDecode(response.body));
   } else {
     throw Exception('failed to login');
     // If the server did not return a 200 OK response, then throw an exception.

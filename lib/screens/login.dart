@@ -129,26 +129,39 @@ class _LoginState extends State<Login> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: RaisedButton(
-                  onPressed: () async {
-                    // Validate will return true if the form is valid, or false if
-                    // the form is invalid.
-                    if (_formKey.currentState.validate()) {
-                      String _id = _idController.text;
-                      String _password = _passwordController.text;
-                      LoginRes res = await postLogin(_id, _password);
-                    }
-                  },
-                  child: Text('Submit'),
+                child: Row(
+                  children: <Widget>[
+                    RaisedButton(
+                      color: Color(0xFFEEEEEE),
+                      onPressed: () async {
+                        // Validate will return true if the form is valid, or false if
+                        // the form is invalid.
+                        if (_formKey.currentState.validate()) {
+                          String _id = _idController.text;
+                          String _password = _passwordController.text;
+                          LoginRes res = await postLogin(_id, _password);
+                          print(res.userid);
+                          print(res.keyword);
+                          print(res.gender);
+                          print(res.age);
+                        }
+                      },
+                      child: Text('Submit'),
+                    ),
+                    RaisedButton(
+                      color: Color(0xFFEEEEEE),
+                      onPressed: () {
+                        getUser();
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => Register()));
+                      },
+                      child: Text('register'),
+                    )
+                  ],
                 ),
               ),
-              RaisedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Register()));
-                },
-                child: Text('register'),
-              )
             ],
           ),
         ),
