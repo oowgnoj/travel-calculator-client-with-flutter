@@ -1,16 +1,19 @@
 import 'dart:convert' show jsonDecode;
 
 class LoginRes {
-  String id;
-  String password;
+  int keyword;
+  int age;
+  int gender;
 
-  LoginRes({this.id, this.password});
+  LoginRes({
+    this.keyword,
+    this.age,
+    this.gender,
+  });
 
   factory LoginRes.fromJson(dynamic json) {
     return LoginRes(
-      id: json['id'],
-      password: json['password'],
-    );
+        keyword: json['keyword'], age: json['age'], gender: json['gender']);
   }
 }
 

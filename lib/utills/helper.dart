@@ -1,7 +1,7 @@
 import 'package:travel_calculator_flutter_client/utills/data.dart';
 
-class Helper {
-  static String getCityCode(citySelected) {
+class ConverToCode {
+  static String getCity(citySelected) {
     return cityMap
         .where((city) => city.cityName == citySelected)
         .toList()[0]
@@ -9,18 +9,18 @@ class Helper {
         .toString();
   }
 
-  static int getInterestCode(interestSelected) {
+  static int getInterest(interestSelected) {
     return interestMap
         .where((interest) => interest.interestName == interestSelected)
         .toList()[0]
         .interestCode;
   }
 
-  static int getGenderCode(genderSelected) {
+  static int getGender(genderSelected) {
     return genderSelected == 'female' ? 1 : 2;
   }
 
-  static int getAgeCode(genderSelected) {
+  static int getAge(genderSelected) {
     return genderSelected != null
         ? int.parse(genderSelected.substring(1, 2))
         : '';

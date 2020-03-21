@@ -11,9 +11,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: Landing(),
       onGenerateRoute: (RouteSettings settings) {
         ('build route for ${settings.name}');

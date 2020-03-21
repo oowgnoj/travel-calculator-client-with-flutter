@@ -5,13 +5,11 @@ import 'package:http/http.dart' as http;
 // generate body
 
 Future<Object> postLogin(id, password) async {
-  print(id);
-  print(password);
   Map<String, String> json = {
     'id': id,
     'password': password,
   };
-  var uri = Uri.http('3.15.20.155:5000', '/signin');
+  var uri = Uri.http('192.168.35.248:5000', '/signin');
   const headers = <String, String>{
     'Content-Type': 'application/json; charset=UTF-8',
   };
@@ -19,11 +17,11 @@ Future<Object> postLogin(id, password) async {
   final response =
       await http.post(uri, headers: headers, body: jsonEncode(json));
   if (response.statusCode == 200) {
-    // return LoginRes.fromJson(response.body);
-    print(response.body);
+    return LoginRes.fromJson(response.body);
   } else {
+    throw Exception('failed to login');
     // If the server did not return a 200 OK response, then throw an exception.
-    return response.body;
+    // return response.body;
     // throw Exception(response);
   }
 }
@@ -46,7 +44,8 @@ Future<Object> postSignin(id, password, gender, age, interest) async {
   if (response.statusCode == 200) {
     return response.body;
   } else {
-    print(response.body);
+    throw Exception('failed to sign up');
+    // throw Exception(response.body);
     // If the server did not return a 200 OK response, then throw an exception.
     // throw Exception(response.error);
   }

@@ -134,19 +134,21 @@ class _LoginState extends State<Login> {
                     // Validate will return true if the form is valid, or false if
                     // the form is invalid.
                     if (_formKey.currentState.validate()) {
-                      String id = _idController.text;
-                      String password = _passwordController.text;
-                      LoginRes res = await postLogin(id, password);
-                      print(res.id);
+                      String _id = _idController.text;
+                      String _password = _passwordController.text;
+                      LoginRes res = await postLogin(_id, _password);
                     }
                   },
                   child: Text('Submit'),
                 ),
               ),
-              RaisedButton(onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Register()));
-              })
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Register()));
+                },
+                child: Text('register'),
+              )
             ],
           ),
         ),

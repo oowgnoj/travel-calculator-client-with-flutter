@@ -48,151 +48,186 @@ class _LandingState extends State<Landing> {
       drawer: MyDrawer(),
       body: Column(
         children: <Widget>[
-          DropdownButtonFormField<String>(
-            value: _city_selected,
-            decoration: InputDecoration(labelText: 'Please select a city'),
-            items: cityMap.map((City value) {
-              return new DropdownMenuItem<String>(
-                value: value.cityName,
-                child: new Text(value.cityName),
-              );
-            }).toList(),
-            onChanged: (value) {
-              setState(() {
-                _city_selected = value;
-              });
-            },
+          Padding(
+            padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+            child: DropdownButtonFormField<String>(
+              value: _city_selected,
+              decoration: InputDecoration(labelText: 'Please select a city'),
+              items: cityMap.map((City value) {
+                return new DropdownMenuItem<String>(
+                  value: value.cityName,
+                  child: new Text(value.cityName),
+                );
+              }).toList(),
+              onChanged: (value) {
+                setState(() {
+                  _city_selected = value;
+                });
+              },
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Container(
-                width: 100,
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                        "${_departureDate_selected != null ? _departureDate_selected.toLocal() : 'please pick date'}"
-                            .split(' ')[0]),
-                    RaisedButton(
-                      onPressed: () {
-                        showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(2020),
-                                lastDate: DateTime(2022))
-                            .then((date) {
-                          setState(() {
-                            _departureDate_selected = date;
+              Padding(
+                padding: const EdgeInsets.fromLTRB(12, 10, 12, 0),
+                child: Container(
+                  width: 150,
+                  child: Column(
+                    children: <Widget>[
+                      RaisedButton(
+                        child: Text(
+                            "${_departureDate_selected != null ? _departureDate_selected.toLocal() : '출발일'}"
+                                .split(' ')[0]),
+                        color: Color(0xFFEEEEEE),
+                        elevation: 0.0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(18.0),
+                            side: BorderSide(color: Colors.grey)),
+                        onPressed: () {
+                          showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(2020),
+                                  lastDate: DateTime(2022))
+                              .then((date) {
+                            setState(() {
+                              _departureDate_selected = date;
+                            });
                           });
-                        });
-                      },
-                    ),
-                  ],
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              Container(
-                width: 100,
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                        "${_arrivalDate_selected != null ? _arrivalDate_selected.toLocal() : 'please pick date'}"
-                            .split(' ')[0]),
-                    RaisedButton(
-                      onPressed: () {
-                        showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(2020),
-                                lastDate: DateTime(2022))
-                            .then((date) {
-                          setState(() {
-                            _arrivalDate_selected = date;
+              Padding(
+                padding: const EdgeInsets.fromLTRB(12, 10, 12, 0),
+                child: Container(
+                  width: 150,
+                  child: Column(
+                    children: <Widget>[
+                      RaisedButton(
+                        child: Text(
+                            "${_arrivalDate_selected != null ? _arrivalDate_selected.toLocal() : '도착일'}"
+                                .split(' ')[0]),
+                        color: Color(0xFFEEEEEE),
+                        elevation: 0.0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(18.0),
+                            side: BorderSide(color: Colors.grey)),
+                        onPressed: () {
+                          showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(2020),
+                                  lastDate: DateTime(2022))
+                              .then((date) {
+                            setState(() {
+                              _arrivalDate_selected = date;
+                            });
                           });
-                        });
-                      },
-                    ),
-                  ],
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Container(
-                width: 100,
-                child: DropdownButtonFormField<String>(
-                  value: _gender_selected,
-                  decoration: InputDecoration(labelText: 'select gender'),
-                  items: genderMap.map((String value) {
-                    return new DropdownMenuItem<String>(
-                      value: value,
-                      child: new Text(value),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _gender_selected = value;
-                    });
-                  },
+          Padding(
+            padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.40,
+                  child: DropdownButtonFormField<String>(
+                    value: _gender_selected,
+                    decoration: InputDecoration(labelText: 'select gender'),
+                    items: genderMap.map((String value) {
+                      return new DropdownMenuItem<String>(
+                        value: value,
+                        child: new Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        _gender_selected = value;
+                      });
+                    },
+                  ),
                 ),
-              ),
-              Container(
-                width: 100,
-                child: DropdownButtonFormField<String>(
-                  value: _age_selected,
-                  decoration: InputDecoration(labelText: 'select age'),
-                  items: ageMap.map((String value) {
-                    return new DropdownMenuItem<String>(
-                      value: value,
-                      child: new Text(value),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _age_selected = value;
-                    });
-                  },
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.40,
+                  child: DropdownButtonFormField<String>(
+                    value: _age_selected,
+                    decoration: InputDecoration(labelText: 'select age'),
+                    items: ageMap.map((String value) {
+                      return new DropdownMenuItem<String>(
+                        value: value,
+                        child: new Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        _age_selected = value;
+                      });
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-          DropdownButtonFormField<String>(
-            value: _interest_selected,
-            decoration: InputDecoration(labelText: 'select interest'),
-            items: interestMap.map((Interest value) {
-              return new DropdownMenuItem<String>(
-                value: value.interestName,
-                child: new Text(value.interestName),
-              );
-            }).toList(),
-            onChanged: (value) {
-              setState(() {
-                _interest_selected = value;
-              });
-            },
+          Padding(
+            padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+            child: DropdownButtonFormField<String>(
+              value: _interest_selected,
+              decoration: InputDecoration(labelText: 'select interest'),
+              items: interestMap.map((Interest value) {
+                return new DropdownMenuItem<String>(
+                  value: value.interestName,
+                  child: new Text(value.interestName),
+                );
+              }).toList(),
+              onChanged: (value) {
+                setState(() {
+                  _interest_selected = value;
+                });
+              },
+            ),
           ),
-          RaisedButton(
-            onPressed: () async {
-              var cityName = _city_selected;
-              var cityCode = Helper.getCityCode(_city_selected);
-              var interestCode = Helper.getInterestCode(_interest_selected);
-              var genderCode = Helper.getGenderCode(_gender_selected);
-              var ageCode = Helper.getAgeCode(_age_selected);
-              var departureDate =
-                  Helper.getFormattedDate(_departureDate_selected);
-              var arrivalDate = Helper.getFormattedDate(_arrivalDate_selected);
-              var userCode = interestCode + genderCode + ageCode;
-              var result = await fetchCalculate(
-                  cityName, cityCode, departureDate, arrivalDate, userCode);
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
+            child: new SizedBox(
+              child: new IconButton(
+                icon: new Icon(
+                  Icons.flight_takeoff,
+                  size: 30,
+                ),
+                onPressed: () async {
+                  var cityName = _city_selected;
+                  var cityCode = ConverToCode.getCity(_city_selected);
+                  var interestCode =
+                      ConverToCode.getInterest(_interest_selected);
+                  var genderCode = ConverToCode.getGender(_gender_selected);
+                  var ageCode = ConverToCode.getAge(_age_selected);
+                  var departureDate =
+                      ConverToCode.getFormattedDate(_departureDate_selected);
+                  var arrivalDate =
+                      ConverToCode.getFormattedDate(_arrivalDate_selected);
+                  var userCode = interestCode + genderCode + ageCode;
+                  var result = await fetchCalculate(
+                      cityName, cityCode, departureDate, arrivalDate, userCode);
 
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          Loading(data: result, city: cityName)));
-            },
-            child: const Text('calculate', style: TextStyle(fontSize: 20)),
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              Loading(data: result, city: cityName)));
+                },
+              ),
+            ),
           ),
           Container(
               height: 300,
