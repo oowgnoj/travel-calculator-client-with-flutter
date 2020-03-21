@@ -177,14 +177,19 @@ class Hotel {
   String rating;
   String photo;
   int price;
-  String adress;
+  String address;
   String room;
 
   Hotel(
-      {this.name, this.rating, this.photo, this.price, this.adress, this.room});
+      {this.name,
+      this.rating,
+      this.photo,
+      this.price,
+      this.address,
+      this.room});
   factory Hotel.fromJson(dynamic json) {
     return Hotel(
-        adress: json['adress'],
+        address: json['address'],
         rating: json['rating'],
         name: json['name'],
         photo: json['photo'],
