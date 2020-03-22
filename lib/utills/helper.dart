@@ -1,4 +1,6 @@
 import 'package:travel_calculator_flutter_client/utills/data.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ConverToCode {
   static String getCity(citySelected) {
@@ -28,5 +30,30 @@ class ConverToCode {
 
   static String getFormattedDate(date) {
     return date.toString().substring(0, 10);
+  }
+}
+
+class Session {
+  static Map<String, String> headers = {};
+
+  static Future<Map> get(dynamic url) async {
+    http.Response response = await http.get(url, headers: headers);
+    updateCookie(response);
+    return jsonDecode(response.body);
+  }
+
+  static Future<Map> post(String url, dynamic data) async {
+    http.Response response = await http.post(url, body: data, headers: headers);
+    updateCookie(response);
+    return jsonDecode(response.body);
+  }
+
+  static void updateCookie(http.Response response) {
+    String rawCookie = response.headers['set-cookie'];
+    if (rawCookie != null) {
+      int index = rawCookie.indexOf(';');
+      headers['cookie'] =
+          (index == -1) ? rawCookie : rawCookie.substring(0, index);
+    }
   }
 }
