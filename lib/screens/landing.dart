@@ -8,6 +8,7 @@ import 'package:travel_calculator_flutter_client/utills/data.dart';
 import 'package:travel_calculator_flutter_client/screens/login.dart';
 import 'package:travel_calculator_flutter_client/components/drawer.dart';
 import 'package:travel_calculator_flutter_client/models/models.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Landing extends StatefulWidget {
   @override
@@ -21,8 +22,27 @@ class _LandingState extends State<Landing> {
   String _interest_selected;
   DateTime _departureDate_selected;
   DateTime _arrivalDate_selected;
+  UserHistory userInfo;
 
   @override
+  void initState() {
+    super.initState();
+    _getUserInfo();
+  }
+
+  _getUserInfo() async {
+    final user = await getUser();
+    setState(() {
+      userInfo = user;
+    });
+  }
+  // _getUserInfo() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     _username = prefs.getInt('age') ?? 0;
+  //   });
+  // }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFEEEEEE),
@@ -200,6 +220,7 @@ class _LandingState extends State<Landing> {
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
             child: new SizedBox(
+              width: MediaQuery.of(context).size.width * 1,
               child: new IconButton(
                 icon: new Icon(
                   Icons.flight_takeoff,

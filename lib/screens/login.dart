@@ -140,10 +140,8 @@ class _LoginState extends State<Login> {
                           String _id = _idController.text;
                           String _password = _passwordController.text;
                           LoginRes res = await postLogin(_id, _password);
-                          print(res.userid);
-                          print(res.keyword);
-                          print(res.gender);
-                          print(res.age);
+                          Navigator.pushNamed(context, '/');
+                          _showAlert(context);
                         }
                       },
                       child: Text('Submit'),
@@ -151,7 +149,7 @@ class _LoginState extends State<Login> {
                     RaisedButton(
                       color: Color(0xFFEEEEEE),
                       onPressed: () {
-                        getUser();
+                        var user = getUser();
                         // Navigator.push(
                         //     context,
                         //     MaterialPageRoute(
@@ -168,4 +166,13 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+}
+
+void _showAlert(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+            title: Text("로그인"),
+            content: Text("로그인 되었습니다."),
+          ));
 }

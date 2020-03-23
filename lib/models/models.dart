@@ -22,6 +22,51 @@ class LoginRes {
   }
 }
 
+class UserHistory {
+  String username;
+  int age;
+  int gender;
+  int keyword;
+  List<History> histories;
+
+  UserHistory(
+      {this.username, this.age, this.gender, this.keyword, this.histories});
+  factory UserHistory.fromJson(dynamic json) {
+    var list = json['histories'] as List;
+    List<History> historiesList = list.map((i) => History.fromJson(i)).toList();
+    return UserHistory(
+        age: json['age'],
+        username: json['username'],
+        gender: json['gender'],
+        keyword: json['keyword'],
+        histories: historiesList);
+  }
+}
+
+class History {
+  String departuredate;
+  String arrivaldate;
+  String city;
+  String photo;
+  Estimate estimate;
+
+  History(
+      {this.departuredate,
+      this.arrivaldate,
+      this.city,
+      this.photo,
+      this.estimate});
+
+  factory History.fromJson(dynamic json) {
+    return History(
+        departuredate: json['departuredate'],
+        arrivaldate: json['arrivaldate'],
+        city: json['city'],
+        photo: json['photo'],
+        estimate: Estimate.fromJson(json['estimate']));
+  }
+}
+
 class City {
   final String cityName;
   final String cityCode;
@@ -70,6 +115,8 @@ class Estimate {
       this.total});
 
   factory Estimate.fromJson(dynamic json) {
+    json = jsonDecode(json);
+
     return Estimate(
       total: json['total'],
       restaurant: json['restaurant'],

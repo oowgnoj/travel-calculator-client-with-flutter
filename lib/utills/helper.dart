@@ -1,5 +1,7 @@
 import 'package:travel_calculator_flutter_client/utills/data.dart';
+import 'package:travel_calculator_flutter_client/models/models.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 class ConverToCode {
@@ -33,27 +35,25 @@ class ConverToCode {
   }
 }
 
-class Session {
-  static Map<String, String> headers = {};
-
-  static Future<Map> get(dynamic url) async {
-    http.Response response = await http.get(url, headers: headers);
-    updateCookie(response);
-    return jsonDecode(response.body);
-  }
-
-  static Future<Map> post(String url, dynamic data) async {
-    http.Response response = await http.post(url, body: data, headers: headers);
-    updateCookie(response);
-    return jsonDecode(response.body);
-  }
-
-  static void updateCookie(http.Response response) {
-    String rawCookie = response.headers['set-cookie'];
-    if (rawCookie != null) {
-      int index = rawCookie.indexOf(';');
-      headers['cookie'] =
-          (index == -1) ? rawCookie : rawCookie.substring(0, index);
-    }
-  }
+void setLocal(UserHistory userHistory) async {
+  final prefs = await SharedPreferences.getInstance();
+  prefs.setString('userName', userHistory.username);
+  prefs.setInt('gender', userHistory.gender);
+  prefs.setInt('age', userHistory.age);
+  prefs.setInt('keyword', userHistory.keyword);
 }
+// {
+//   "username": "aaa",
+//   "age": 20,
+//   "gender": 2,
+//   "keyword": 700,
+//   "histories": [
+//     {
+//       "departuredate": "2019-11-08",
+//       "arrivaldate": "2019-11-13",
+//       "city": "London",
+//       "estimate": "{\"restaurant\":52579,\"hotel\":196753,\"hotelratings\":3,\"nonstopflight\":null,\"flight\":901880,\"total\":2148540}",
+//       "photo": "https://images.unsplash.com/photo-1475463606759-53a070b44126?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1061&q=80"
+//     }
+//   ]
+// }
