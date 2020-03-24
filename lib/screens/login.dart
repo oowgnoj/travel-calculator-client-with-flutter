@@ -130,7 +130,24 @@ class _LoginState extends State<Login> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment
+                          .center, // Center Column contents vertically,
+                      children: <Widget>[
+                        RaisedButton(
+                          color: Color(0xFFEEEEEE),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Register()));
+                          },
+                          child: Text('register'),
+                        )
+                      ],
+                    ),
                     RaisedButton(
                       color: Color(0xFFEEEEEE),
                       onPressed: () async {
@@ -144,19 +161,8 @@ class _LoginState extends State<Login> {
                           _showAlert(context);
                         }
                       },
-                      child: Text('Submit'),
+                      child: Text('login'),
                     ),
-                    RaisedButton(
-                      color: Color(0xFFEEEEEE),
-                      onPressed: () {
-                        var user = getUser();
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => Register()));
-                      },
-                      child: Text('register'),
-                    )
                   ],
                 ),
               ),
