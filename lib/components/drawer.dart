@@ -3,6 +3,7 @@ import 'package:travel_calculator_flutter_client/Main.dart';
 import 'package:travel_calculator_flutter_client/models/models.dart';
 import 'package:travel_calculator_flutter_client/screens/login.dart';
 import 'package:travel_calculator_flutter_client/screens/landing.dart';
+import 'package:travel_calculator_flutter_client/screens/mypage.dart';
 import 'package:travel_calculator_flutter_client/utills/api.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -84,8 +85,8 @@ class _MyDrawerState extends State<MyDrawer> {
                   title: Text('Profile'),
                   onTap: () {
                     print('mypage');
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => Login()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Mypage()));
                   },
                 ),
                 ListTile(

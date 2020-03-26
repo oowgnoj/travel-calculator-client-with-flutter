@@ -25,17 +25,17 @@ class _LandingState extends State<Landing> {
   UserHistory userInfo;
 
   @override
-  void initState() {
-    super.initState();
-    _getUserInfo();
-  }
+  // void initState() {
+  //   super.initState();
+  //   _getUserInfo();
+  // }
 
-  _getUserInfo() async {
-    final user = await getUser();
-    setState(() {
-      userInfo = user;
-    });
-  }
+  // _getUserInfo() async {
+  //   final user = await getUser();
+  //   setState(() {
+  //     userInfo = user;
+  //   });
+  // }
   // _getUserInfo() async {
   //   final prefs = await SharedPreferences.getInstance();
   //   setState(() {
