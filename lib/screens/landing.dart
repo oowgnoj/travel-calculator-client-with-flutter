@@ -244,8 +244,8 @@ class _LandingState extends State<Landing> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>
-                              Loading(data: result, city: cityName)));
+                          builder: (context) => Loading(
+                              data: result, city: cityName, items: [])));
                 },
               ),
             ),

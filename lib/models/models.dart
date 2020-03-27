@@ -101,7 +101,7 @@ class Calculate {
 class Estimate {
   int restaurant;
   int flight;
-  int nonstopflight;
+  dynamic nonstopflight;
   int hotel;
   int hotelratings;
   int total;
@@ -115,7 +115,7 @@ class Estimate {
       this.total});
 
   factory Estimate.fromJson(dynamic json) {
-    json = jsonDecode(json);
+    /* json = jsonDecode(json); */
 
     return Estimate(
       total: json['total'],
@@ -228,7 +228,7 @@ class Hotel {
   String name;
   String rating;
   String photo;
-  int price;
+  dynamic price;
   String address;
   String room;
 
@@ -245,7 +245,7 @@ class Hotel {
         rating: json['rating'],
         name: json['name'],
         photo: json['photo'],
-        price: json['price'].toInt(),
+        price: json['price'],
         room: json['roon']);
   }
 }
