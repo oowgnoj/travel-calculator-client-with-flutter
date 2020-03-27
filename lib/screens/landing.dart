@@ -6,6 +6,7 @@ import 'package:travel_calculator_flutter_client/screens/loading.dart';
 import 'package:travel_calculator_flutter_client/screens/register.dart';
 import 'package:travel_calculator_flutter_client/utills/data.dart';
 import 'package:travel_calculator_flutter_client/screens/login.dart';
+import 'package:travel_calculator_flutter_client/screens/mypage.dart';
 import 'package:travel_calculator_flutter_client/components/drawer.dart';
 import 'package:travel_calculator_flutter_client/models/models.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -61,7 +62,10 @@ class _LandingState extends State<Landing> {
           builder: (context) => IconButton(
             icon: new Icon(Feather.menu),
             color: Colors.black,
-            onPressed: () => Scaffold.of(context).openDrawer(),
+            onPressed: () => {
+              /* Scaffold.of(context).openDrawer() */ Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Mypage()))
+            },
           ),
         ),
       ),

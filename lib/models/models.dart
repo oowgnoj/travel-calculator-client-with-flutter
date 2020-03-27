@@ -34,6 +34,7 @@ class UserHistory {
   factory UserHistory.fromJson(dynamic json) {
     var list = json['histories'] as List;
     List<History> historiesList = list.map((i) => History.fromJson(i)).toList();
+
     return UserHistory(
         age: json['age'],
         username: json['username'],
@@ -63,7 +64,7 @@ class History {
         arrivaldate: json['arrivaldate'],
         city: json['city'],
         photo: json['photo'],
-        estimate: Estimate.fromJson(json['estimate']));
+        estimate: Estimate.fromJson(jsonDecode(json['estimate'])));
   }
 }
 
@@ -116,7 +117,6 @@ class Estimate {
 
   factory Estimate.fromJson(dynamic json) {
     /* json = jsonDecode(json); */
-
     return Estimate(
       total: json['total'],
       restaurant: json['restaurant'],

@@ -5,16 +5,14 @@ import 'package:http/http.dart' as http;
 import 'package:requests/requests.dart';
 import 'package:travel_calculator_flutter_client/utills/helper.dart';
 
-// String localServer = 'http://3.15.20.155:5000';
-String localServer = 'http://10.0.2.2:5000';
+String localServer = 'http://3.15.20.155:5000';
+// String localServer = 'http://10.0.2.2:5000';
 String stageServer = 'http://192.168.35.248:5000';
 
 // generate body
 
-Future<Object> getUser() async {
-  const headers = <String, String>{
-    'Content-Type': 'application/json; charset=UTF-8',
-  };
+Future<UserHistory> getUser() async {
+  print('getuser clicked!');
 
   final response = await Requests.get(localServer + '/mypage');
   if (response.statusCode == 200) {
@@ -35,6 +33,8 @@ Future<Object> postLogin(id, password) async {
   const headers = <String, String>{
     'Content-Type': 'application/json; charset=UTF-8',
   };
+
+  print('clicked!');
 
   final response = await Requests.post(localServer + '/signin',
       headers: headers,
@@ -103,7 +103,7 @@ Future<Calculate> fetchCalculate(
     'cityCode': cityCode,
     'departureDate': departureDate,
     'arrivalDate': arrivalDate,
-    'code': '841',
+    'code': userCode.toString(),
     'cityName': cityName
   };
   const headers = <String, String>{
